@@ -1,0 +1,22 @@
+class Solution {
+public:
+    bool lemonadeChange(vector<int>& a) {
+        sort(a.begin(),a.end());
+        int totalMoney = 0;
+        for(int i=0;i<a.size();i++){
+            if(a[i]=5){
+                totalMoney += 5 ;
+            }
+            else {
+                int remainder = a[i] - 5;
+                if(totalMoney - remainder){
+                    totalMoney -= remainder;
+                }
+                else {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+};
