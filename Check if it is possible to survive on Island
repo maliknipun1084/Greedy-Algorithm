@@ -1,0 +1,23 @@
+
+class Solution{
+public:
+    int minimumDays(int s, int n, int m){
+        // code here
+        int sunday = s/7;
+        int buydays = s -sunday;
+        int ans = 0;
+        int food = s*m;
+        if(food%n==0){
+            ans = food/n;
+        }
+        else{
+            ans = food/n +1 ;
+        }
+        if(ans<=buydays){
+            return ans;
+        }
+        else{
+            return -1;
+        }
+    }
+};
