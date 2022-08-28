@@ -1,0 +1,58 @@
+class Node {
+    public :
+        int data ;
+        Node *left ;
+        Node *right ;
+        Node(int val){
+            data = val;
+            left =NULL;
+            right =NULL;
+        }
+        
+    };
+    class cmp{
+        public :
+        bool operator()(Node* a,Node* b){
+        return a->data >b->data;
+        }
+    };
+    class Solution
+{
+   
+	public:
+	void traversal(Node*root,vector<string > &ans,string temp){
+	    if(!root->left and !root->right){
+	        ans.push_back(temp);
+	        return; 
+	    }
+	    traversal(root->left,ans,temp + '0');
+	    traversal(root->right,ans,temp + '1');
+	    
+	}
+		vector<string> huffmanCodes(string s,vector<int> f,int n)
+		{
+		    // Code here
+		    priority_queue<Node*,vector<Node*>,cmp>pq;
+		    for(int i=0;i<n;i++){
+		        Node *temp =new Node(f[i]);
+		        pq.push(temp);
+		    }
+		    
+		    while(pq.size()>1){
+		        Node * a = pq.top();
+		        pq.pop();
+		        Node * b = pq.top();
+		        pq.pop();
+		        Node * merge = new Node(a->data + b->data);
+		        merge->left = a;
+		        merge->right = b;
+		        pq.push(merge);
+		    }
+		    Node* root = pq.top();
+		    vector<string > ans;
+		    string temp = "";
+		    traversal(root,ans,temp);
+		    return ans ;
+		    
+		}
+};
